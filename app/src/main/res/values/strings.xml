@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">CDA</string>
+    <string name="action_settings">Settings</string>
+    <string name="splash_inicial">splash</string>
+
+	<string name="lblMapa">Credits</string>
+	 <string name="title_activity_mapa">Mapa</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="lblTest">Teste</string>
+    <string name="lblDistancia">Distância</string>
+    <string name="lblVelocidade">Velocidade</string>
+</resources>

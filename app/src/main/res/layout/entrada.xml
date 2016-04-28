@@ -1,0 +1,29 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/bMapa"
+        android:layout_width="174dp"
+        android:layout_height="35dp"
+        android:background="@android:color/transparent"
+        android:fontFamily="Monotype Corsiva"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="176dp"
+        android:layout_alignParentTop="true"
+        android:text="@string/lblMapa"
+        android:shadowRadius="30"/>
+
+    <Button
+        android:id="@+id/bTest"
+        android:layout_width="174dp"
+        android:layout_height="35dp"
+        android:background="@android:color/transparent"
+        android:fontFamily="Monotype Corsiva"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="231dp"
+        android:layout_alignParentTop="true"
+        android:text="@string/lblTest"
+        android:shadowRadius="30"/>
+
+</RelativeLayout>

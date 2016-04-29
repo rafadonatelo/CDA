@@ -40,6 +40,7 @@ public class MainActivity extends Activity implements LocationListener
 	ArrayList<String>	m_lengthOfTime;
 	ArrayList<String>	m_speedList;
 	float				m_totalSpeed;
+	float				m_totalDistance;
 	SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
     TextView txtDistancia, txtVelocidade;
 
@@ -140,9 +141,9 @@ public class MainActivity extends Activity implements LocationListener
 		}
 		else
 		{
-			this.m_actionButton.setText("Start");
+			this.m_actionButton.setText("Iniciar");
     		this.m_locationManager.removeUpdates(this);	//	Stops the tracking
-    		this.drawPath();	//	Draws the path
+    		this.drawPath();
 		}
 	}
 
@@ -160,6 +161,22 @@ public class MainActivity extends Activity implements LocationListener
         CameraPosition cameraPosition = new CameraPosition.Builder().target(directionPoints.get(0)).zoom(50).build();	//	Centers the camera on the first track
         this.m_googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
     }
+
+
+	/**
+	 * Desenha o trajeto percorrido
+	 */
+	private	void	drawPath(ArrayList<LatLng> directionPoints)
+	{
+		if (directionPoints.isEmpty())	//	If there are not tracks, leaves
+			return ;
+		PolylineOptions rectLine = new PolylineOptions().width(5).color(Color.RED);	//	Customizes the line in red with a width of 5
+		rectLine.addAll(directionPoints);	//	Adds all the tracks in the line that is going to be drawn
+		this.m_googleMap.addPolyline(rectLine);	//	Adds the new line and draws it
+		CameraPosition cameraPosition = new CameraPosition.Builder().target(directionPoints.get(0)).zoom(50).build();	//	Centers the camera on the first track
+		this.m_googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+	}
+
     @SuppressWarnings("ResourceType")
     @Override
     protected void 	onResume()
@@ -207,7 +224,7 @@ public class MainActivity extends Activity implements LocationListener
     }
 
     public 	void onLocationChanged(Location loc)
-	{	
+	{
 		if (localizacaoInicial == null)
 			localizacaoInicial = loc;
         if (loc == null)
@@ -216,8 +233,9 @@ public class MainActivity extends Activity implements LocationListener
         this.m_speedList.add(Float.toString((float) (loc.getSpeed() * 3.6)));	//	Adds location speed
 		this.m_totalSpeed += loc.getSpeed() * 3.6;
 
-        this.txtVelocidade.setText(String.valueOf(this.m_totalSpeed));
-        this.txtDistancia.setText((String.valueOf(getDistance(localizacaoInicial.getLatitude(), localizacaoInicial.getLongitude(), loc.getLatitude(), loc.getLongitude()))));
+        this.txtVelocidade.setText(String.valueOf(loc.getSpeed() * 3.6));
+		this.m_totalDistance += getDistance(localizacaoInicial.getLatitude(), localizacaoInicial.getLongitude(), loc.getLatitude(), loc.getLongitude());
+        this.txtDistancia.setText((String.valueOf(this.m_totalDistance)));
 
 		this.m_lengthOfTime.add(sdf.format(new Date(loc.getTime())));	//	Getting	location time
 		this.m_GPSTracker.insertRow(loc.getLatitude(), loc.getLongitude());	//	Inserting in database the coordinates

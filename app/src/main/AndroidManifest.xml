@@ -8,7 +8,7 @@
          location permissions for the 'MyLocation' functionality. 
     -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="com.chchchChia.SimpleGPS.permission.MAPS_RECEIVE" />
+    <uses-permission android:name="MAPS_RECEIVE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
@@ -36,11 +36,11 @@
             android:launchMode="singleTask">
         </activity>
         <activity
-            android:name=".controllers.MainActivity"
+            android:name=".controllers.MainActivity" android:screenOrientation="landscape"
             android:label="@string/app_name">
         </activity>
 
-        <activity android:name=".controllers.ResultsActivity" android:label="@string/app_name" >
+        <activity android:name=".controllers.ResultsActivity" android:label="@string/app_name" android:screenOrientation="landscape">
         </activity>
 
 
